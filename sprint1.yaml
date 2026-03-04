@@ -2,7 +2,22 @@ openapi: 3.0.0
 info: 
 title: Sprint 1 API
 version: 1.0.0
-description:
+description: >
   Services for TigerChow which is a Clemson food app that allows customers to make online purchases to
   satisfy their appetite
 
+paths:
+  /customers:
+    post:
+      summary: register a customer account
+      parameters:
+      - name: id
+        in: query
+        required: true
+        schema:
+          type: string
+    responses:
+      '201': 
+        description: account successfully created
+      '400':
+        description: account unsuccessfully created
