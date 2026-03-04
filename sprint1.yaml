@@ -1,23 +1,50 @@
 openapi: 3.0.0
 info: 
-title: Sprint 1 API
-version: 1.0.0
-description: >
-  Services for TigerChow which is a Clemson food app that allows customers to make online purchases to
-  satisfy their appetite
+  title: Sprint 1 API
+  version: 1.0.0
+  description: >
+    Services for TigerChow which is a Clemson food app that allows customers to make online purchases to
+    satisfy their appetite
+
+#first user story
+#as a As a TigerChow customer, I want to register for the site with my name, 
+#email, phone number,  and a password so that I can access saved preferences for future purchases and logins.
 
 paths:
   /customers:
     post:
       summary: register a customer account
       parameters:
-      - name: id
-        in: query
-        required: true
-        schema:
-          type: string
-    responses:
-      '201': 
-        description: account successfully created
-      '400':
-        description: account unsuccessfully created
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '201': 
+          description: account successfully created
+        '400':
+          description: account unsuccessfully created
+
+
+#second user story
+#As a TigerChow registered customer, I want to set a preference to 
+#prevent getting promotions from the TigerChow website, so that I can stop
+#getting information and ads from the website.
+
+  /api/customer/notification_method:
+    post: 
+      summary: stop receiving promotion notifications
+      parameters:
+        - name: customer_id
+          in: query
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: updated settings; successfully turned off notifications
+        '400':
+          description: unsuccessfully updated settings. The userID is invalid
+
+
