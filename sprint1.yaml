@@ -1,5 +1,5 @@
 openapi: 3.0.0
-info: 
+info:
   title: Sprint 1 API
   version: 1.0.0
   description: >
@@ -7,33 +7,47 @@ info:
     satisfy their appetite
 
 #first user story
-#as a As a TigerChow customer, I want to register for the site with my name, 
+#as a As a TigerChow customer, I want to register for the site with my name,
 #email, phone number,  and a password so that I can access saved preferences for future purchases and logins.
 
 paths:
   /customers:
     post:
       summary: register a customer account
-      parameters:
-        - name: id
-          in: query
-          required: true
-          schema:
-            type: string
+      description: creates a new account with name, email, phone number, and password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - email
+                - phone
+                - password
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                phone:
+                  type: int
+                password:
+                  type: int
       responses:
-        '201': 
+        "201":
           description: account successfully created
-        '400':
+        "400":
           description: account unsuccessfully created
 
-
-#second user story
-#As a TigerChow registered customer, I want to set a preference to 
-#prevent getting promotions from the TigerChow website, so that I can stop
-#getting information and ads from the website.
+  #second user story
+  #As a TigerChow registered customer, I want to set a preference to
+  #prevent getting promotions from the TigerChow website, so that I can stop
+  #getting information and ads from the website.
 
   /api/customer/notification_method:
-    post: 
+    post:
       summary: stop receiving promotion notifications
       parameters:
         - name: customer_id
@@ -42,9 +56,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: updated settings; successfully turned off notifications
-        '400':
+        "400":
           description: unsuccessfully updated settings. The userID is invalid
-
-
