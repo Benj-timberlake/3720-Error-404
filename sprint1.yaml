@@ -60,3 +60,36 @@ paths:
           description: updated settings; successfully turned off notifications
         "400":
           description: unsuccessfully updated settings. The userID is invalid
+
+#third user story
+#As a TigerChow registered customer, I want to set a preference for my 
+#preferred order notification method (SMS or eMail) so I get order updates that I will not miss.
+
+/api/customer/{customer_id}/preferences:
+  put: 
+    summary: set payment type for orders
+    parameters:
+      - name: customer_id
+        in: path
+        required: true
+        schema: 
+          type: int
+    requestBody: 
+      required: true
+      content: 
+        application/json:
+          schema:
+            type: object
+            properties:
+              SMS:
+                type: string
+              eMail:
+                type: string
+    responses:
+      '200': 
+        description: updated your preferences to receive notifications
+    
+
+
+
+
